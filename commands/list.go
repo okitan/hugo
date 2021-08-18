@@ -171,6 +171,8 @@ List requires a subcommand, e.g. ` + "`hugo list drafts`.",
 					"publishDate",
 					"draft",
 					"permalink",
+					"categories",
+					"tags",
 				})
 				for _, p := range sites.Pages() {
 					if !p.IsPage() {
@@ -185,6 +187,8 @@ List requires a subcommand, e.g. ` + "`hugo list drafts`.",
 						p.PublishDate().Format(time.RFC3339),
 						strconv.FormatBool(p.Draft()),
 						p.Permalink(),
+						p.GetTerms("categories").Titles(),
+						p.GetTerms("tags").Titles(),
 					})
 					if err != nil {
 						return newSystemError("Error writing posts to stdout", err)

@@ -20,6 +20,8 @@ import (
 	"github.com/gohugoio/hugo/compare"
 
 	"github.com/gohugoio/hugo/resources/resource"
+
+	"strings"
 )
 
 var (
@@ -32,6 +34,16 @@ type Pages []Page
 
 func (ps Pages) String() string {
 	return fmt.Sprintf("Pages(%d)", len(ps))
+}
+
+func (pages Pages) Titles() string {
+	titles := make([]string, len(pages))
+
+	for i,p := range pages {
+		titles[i] = p.Title()
+	}
+
+	return strings.Join(titles, ",")
 }
 
 // Used in tests.
