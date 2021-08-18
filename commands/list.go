@@ -187,8 +187,8 @@ List requires a subcommand, e.g. ` + "`hugo list drafts`.",
 						p.PublishDate().Format(time.RFC3339),
 						strconv.FormatBool(p.Draft()),
 						p.Permalink(),
-						p.GetTerms("categories").Titles(),
-						p.GetTerms("tags").Titles(),
+						strings.Join(p.GetTerms("categories").Titles(), ","),
+						strings.Join(p.GetTerms("tags").Titles(), ","),
 					})
 					if err != nil {
 						return newSystemError("Error writing posts to stdout", err)
